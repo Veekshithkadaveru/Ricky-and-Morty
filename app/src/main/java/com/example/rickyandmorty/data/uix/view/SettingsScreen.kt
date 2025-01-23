@@ -3,11 +3,15 @@ package com.example.rickyandmorty.data.uix.view
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -16,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -54,5 +59,27 @@ fun SettingsScreen(settingViewModel: SettingsViewModel, navController: NavContro
         ) {
             TODO("Create DarkMode Toggle, Language Selection, Social Media Section")
         }
+    }
+}
+
+@Composable
+fun DarkModelToggle(isDarkModeEnable: Boolean, onToggle: (Boolean) -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = "Dark Mode",
+            color = Color(0xFFD1D1D1),
+            style = MaterialTheme.typography.bodyLarge
+        )
+        Switch(
+            checked = isDarkModeEnable,
+            onCheckedChange = onToggle,
+            colors = SwitchDefaults.colors(checkedThumbColor = Color(0xFF1F8A70))
+        )
     }
 }
