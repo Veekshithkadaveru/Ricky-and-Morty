@@ -31,8 +31,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.rickyandmorty.R
 import com.example.rickyandmorty.data.uix.uicomponent.BottomNavigationBar
 import com.example.rickyandmorty.data.uix.viewmodel.SettingsViewModel
 
@@ -139,6 +141,39 @@ fun LanguageSelection(selectedLanguage: String, onLanguageSelected: (String) -> 
                     }
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun SocialMediaSection() {
+    Column {
+        Text(
+            text = "Follow Us On:",
+            color = Color(0xFF1F8A70),
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(bottom = 8.dp),
+            textAlign = TextAlign.Center
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            SocialMediaIcon(
+                iconRes = R.drawable.ic_launcher_foreground, // Replace with actual drawable icon
+                description = "Twitter",
+                onClick = { /* Handle Twitter navigation */ }
+            )
+            SocialMediaIcon(
+                iconRes = R.drawable.ic_launcher_foreground, // Replace with actual drawable icon
+                description = "LinkedIn",
+                onClick = { /* Handle LinkedIn navigation */ }
+            )
+            SocialMediaIcon(
+                iconRes = R.drawable.ic_launcher_foreground, // Replace with actual drawable icon
+                description = "GitHub",
+                onClick = { /* Handle GitHub navigation */ }
+            )
         }
     }
 }
