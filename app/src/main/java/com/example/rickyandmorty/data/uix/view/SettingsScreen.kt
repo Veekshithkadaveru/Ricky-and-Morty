@@ -1,12 +1,16 @@
 package com.example.rickyandmorty.data.uix.view
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -81,5 +85,56 @@ fun DarkModelToggle(isDarkModeEnable: Boolean, onToggle: (Boolean) -> Unit) {
             onCheckedChange = onToggle,
             colors = SwitchDefaults.colors(checkedThumbColor = Color(0xFF1F8A70))
         )
+    }
+}
+
+@Composable
+fun LanguageSelection(selectedLanguage: String, onLanguageSelected: (String) -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = "Language",
+            color = Color(0xFFD1D1D1),
+            style = MaterialTheme.typography.bodyLarge
+        )
+
+        Box {
+            Text(text = selectedLanguage,
+                color = Color(0xFF1F8A70),
+                modifier = Modifier.clickable { expanded = !expanded })
+
+            DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+
+                DropdownMenuItem(
+                    text = { Text(text = "English") },
+                    onClick = {
+                        onLanguageSelected("English")
+                        expanded = false
+                    })
+
+                DropdownMenuItem(
+                    text = { Text("Turkish") },
+                    onClick = {
+                        onLanguageSelected("Turkish")
+                        expanded = false
+                    }
+                )
+
+                DropdownMenuItem(
+                    text = { Text("German") },
+                    onClick = {
+                        onLanguageSelected("German")
+                        expanded = false
+                    }
+                )
+            }
+        }
     }
 }
