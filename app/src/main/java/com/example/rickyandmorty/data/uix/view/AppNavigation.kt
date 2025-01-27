@@ -15,7 +15,7 @@ import com.example.rickyandmorty.data.uix.viewmodel.LocationViewModel
 import com.example.rickyandmorty.data.uix.viewmodel.SettingsViewModel
 
 @Composable
-fun Transitions(
+fun AppNavigation(
     homeViewModel: HomeViewModel,
     episodeViewModel: EpisodeViewModel,
     locationViewModel: LocationViewModel,
