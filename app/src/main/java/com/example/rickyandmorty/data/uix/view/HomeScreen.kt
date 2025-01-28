@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -45,11 +46,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.rickyandmorty.data.entity.Character
 import com.example.rickyandmorty.data.uix.uicomponent.BottomNavigationBar
+import com.example.rickyandmorty.data.uix.uicomponent.ShimmerEffect
 import com.example.rickyandmorty.data.uix.viewmodel.HomeViewModel
+import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.sign
@@ -158,63 +162,52 @@ fun HomeScreen(viewModel: HomeViewModel, navController: NavController) {
 
 @Composable
 fun CharacterCard(character: Character, offsetX: Float, alpha: Float, onClick: () -> Unit) {
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .wrapContentHeight()
-        .padding(16.dp)
-        .graphicsLayer {
-            translationX = offsetX
-            rotationZ = 0.1f * offsetX / 10
-            this.alpha = alpha
-            cameraDistance = 16 * density
-        }
-        .clickable { onClick() },
-        elevation = CardDefaults.cardElevation(16.dp),
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(16.dp)
+            .graphicsLayer {
+                translationX = offsetX
+                rotationZ = 0.1f * offsetX / 10
+                this.alpha = alpha
+                cameraDistance = 16 * density
+            }
+            .clickable { onClick() }, // Navigates to the character's detail screen when clicked
+        elevation = CardDefaults.cardElevation(8.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFF3C3E44))
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color(0xFF202329), shape = RoundedCornerShape(12.dp))
-                .padding(16.dp)
-        ) {
-            Text(
-                text = character.name,
-                style = MaterialTheme.typography.titleMedium,
-                color = Color(0xFF1F8A70)
+        Column(modifier = Modifier.fillMaxWidth().wrapContentHeight()) {
+            // Displaying character image
+            GlideImage(
+                imageModel = character.image,
+                contentDescription = character.name,
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f),
+                loading = {
+                    ShimmerEffect(modifier = Modifier.fillMaxSize())
+                }
             )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            CharacterAttributeRow(
-                icon = Icons.Default.Person,
-                label = "",
-                value = character.species
-            )
-            CharacterAttributeRow(
-                icon = Icons.Default.Accessibility,
-                label = "",
-                value = character.status
-            )
-            CharacterAttributeRow(
-                icon = Icons.Default.Transgender,
-                label = "",
-                value = character.gender
-            )
-            CharacterAttributeRow(
-                icon = Icons.Default.Place,
-                label = "",
-                value = character.location.name
-            )
-            CharacterAttributeRow(
-                icon = Icons.Default.Bookmark,
-                label = "",
-                value = character.origin.name
-            )
+            // Displaying character details in a column
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xFF202329), shape = RoundedCornerShape(12.dp))
+                    .padding(16.dp)
+            ) {
+                Text(text = character.name, style = MaterialTheme.typography.titleMedium, color = Color(0xFF1F8A70))
+                Spacer(modifier = Modifier.height(8.dp))
+                CharacterAttributeRow(icon = Icons.Default.Person, label = "", value = character.species)
+                CharacterAttributeRow(icon = Icons.Default.Accessibility, label = "", value = character.status)
+                CharacterAttributeRow(icon = Icons.Default.Transgender, label = "", value = character.gender)
+                CharacterAttributeRow(icon = Icons.Default.Place, label = "", value = character.location.name)
+                CharacterAttributeRow(icon = Icons.Default.Bookmark, label = "", value = character.origin.name)
+            }
         }
     }
 }
-
 @Composable
 fun CharacterAttributeRow(icon: ImageVector, label: String, value: String) {
     Row(

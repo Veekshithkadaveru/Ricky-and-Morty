@@ -67,13 +67,19 @@ fun SettingsScreen(settingViewModel: SettingsViewModel, navController: NavContro
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(32.dp)
         ) {
-            TODO("Create DarkMode Toggle, Language Selection, Social Media Section")
+            DarkModeToggle(isDarkModeEnable = isDarkEnable) { isDarkEnable = it }
+
+            // Language Selection Section
+            LanguageSelection(selectedLanguage) { selectedLanguage = it }
+
+            // Social Media Icons Section
+            SocialMediaSection()
         }
     }
 }
 
 @Composable
-fun DarkModelToggle(isDarkModeEnable: Boolean, onToggle: (Boolean) -> Unit) {
+fun DarkModeToggle(isDarkModeEnable: Boolean, onToggle: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

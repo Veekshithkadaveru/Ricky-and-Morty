@@ -20,8 +20,8 @@ fun BottomNavigationBar(navController: NavController,currentScreen:String){
     NavigationBar(containerColor = Color(0xFF202329)) {
         NavigationBarItem(icon = { Icon(imageVector = Icons.Default.Home, contentDescription = "Home")},
             label = { Text(text = "Characters")},
-            selected = currentScreen=="Home Screen",
-            onClick = {navController.navigate("Home Screen")},
+            selected = currentScreen=="HomeScreen",
+            onClick = {navController.navigate("HomeScreen")},
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = Color(0xFF4CAF50),
                 selectedTextColor = Color(0xFF4CAF50),
@@ -52,7 +52,7 @@ fun BottomNavigationBar(navController: NavController,currentScreen:String){
         )
 
         NavigationBarItem(icon = { Icon(imageVector = Icons.Default.Settings, contentDescription = "Settings")},
-            label = { Text(text = "Locations")},
+            label = { Text(text = "Settings")},
             selected = currentScreen=="SettingScreen",
             onClick = {navController.navigate("SettingScreen")},
             colors = NavigationBarItemDefaults.colors(
