@@ -14,7 +14,8 @@ class EpisodeDataSource(private val episodeDao: EpisodeDao) {
 
         do {
             val response = episodeDao.getAllEpisodes(page)
-            allEpisodes.addAll(response.result)
+            val result = response.result
+            allEpisodes.addAll(result)
             hasNextPage = response.info.next != null
             page++
         } while (hasNextPage)
@@ -25,7 +26,6 @@ class EpisodeDataSource(private val episodeDao: EpisodeDao) {
     suspend fun getFilteredEpisodes(name: String? = null, episode: String? = null): List<Episode> =
         withContext(Dispatchers.IO) {
             val response = episodeDao.getFilteredEpisodes(name, episode)
-
             return@withContext response.result
         }
 
