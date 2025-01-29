@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface EpisodeDao {
 
     @GET("episode")
-    suspend fun getAllEpisodes(@Query("pages") pages: Int): EpisodeResponse
+    suspend fun getAllEpisodes(@Query("page") page: Int): EpisodeResponse
 
     @GET("episode")
     suspend fun getFilteredEpisodes(

@@ -15,11 +15,11 @@ import javax.inject.Inject
 class LocationViewModel @Inject constructor(private val locationRepository: LocationRepository) :
     ViewModel() {
 
-    private    val _locationList=MutableStateFlow<List<Location>>(emptyList())
-    val locationList:StateFlow<List<Location>> = _locationList.asStateFlow()
+    private val _locationList = MutableStateFlow<List<Location>>(emptyList())
+    val locationList: StateFlow<List<Location>> = _locationList.asStateFlow()
 
-    private val _filteredList=MutableStateFlow<List<Location>>(emptyList())
-    val filteredList:StateFlow<List<Location>> = _filteredList.asStateFlow()
+    private val _filteredList = MutableStateFlow<List<Location>>(emptyList())
+    val filteredList: StateFlow<List<Location>> = _filteredList.asStateFlow()
 
     init {
         getLocations()
@@ -27,18 +27,18 @@ class LocationViewModel @Inject constructor(private val locationRepository: Loca
 
     private fun getLocations() {
         viewModelScope.launch {
-            val locations=locationRepository.getAllLocations()
-            _locationList.value=locations
-            _filteredList.value=locations
+            val locations = locationRepository.getAllLocations()
+            _locationList.value = locations
+            _filteredList.value = locations
         }
     }
 
-    fun filterLocations(query:String){
-        _filteredList.value=if (query.isBlank()){
+    fun filterLocations(query: String) {
+        _filteredList.value = if (query.isBlank()) {
             _locationList.value
-        }else{
-           _locationList.value.filter {
-                it.name.contains(query,ignoreCase = true)
+        } else {
+            _locationList.value.filter {
+                it.name.contains(query, ignoreCase = true)
             }
         }
     }

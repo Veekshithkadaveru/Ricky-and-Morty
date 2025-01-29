@@ -150,7 +150,6 @@ fun EpisodeCard(episode: Episode, navController: NavController) {
                                 animatedOffsetX.snapTo(newOffset)
                             }
                         }
-
                     }
                 )
             },

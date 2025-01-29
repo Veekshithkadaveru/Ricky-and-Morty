@@ -14,9 +14,9 @@ class EpisodeDataSource(private val episodeDao: EpisodeDao) {
 
         do {
             val response = episodeDao.getAllEpisodes(page)
-            val result = response.result ?: emptyList() // Handle null safely by providing an empty list
+            val result = response.result ?: emptyList() // Null safety fix
             allEpisodes.addAll(result)
-            hasNextPage = response.info?.next != null // Check for null in `info`
+            hasNextPage = response.info.next != null
             page++
         } while (hasNextPage)
 

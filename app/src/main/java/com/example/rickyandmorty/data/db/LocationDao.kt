@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface LocationDao {
 
     @GET("location")
-    suspend fun getAllLocations(@Query("pages") pages: Int): LocationResponse
+    suspend fun getAllLocations(@Query("page") page: Int): LocationResponse
 
     @GET("location")
     suspend fun getFilteredLocations(
