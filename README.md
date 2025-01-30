@@ -1,4 +1,4 @@
-# Ricky and Morty
+# Rick and Morty
 This repository contains the code for Ricky and Morty Characters App which is my personal project.
 
 It includes the following popular libraries:
@@ -8,3 +8,6 @@ It includes the following popular libraries:
 - [Room](https://developer.android.com/training/data-storage/room) - Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
 
 - [Retrofit](https://github.com/square/retrofit) - A type-safe HTTP client for Android and the JVM.
+
+## Getting Started
+Visit [The Rick and Morty Api](https://rickandmortyapi.com/) to learn about the api used for this project.
